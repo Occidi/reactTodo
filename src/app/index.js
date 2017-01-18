@@ -1,19 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-//Create Memecomponent
-var MemeComponent = React.createClass({
-    render: function(){
-        return(
-            <div>
-                <p><strong>Meme:</strong>{this.props.meme.name}</p>
-                <p><strong>Meme quality:</strong>{this.props.meme.quality}</p>
-                <p><strong>Meme popularity:</strong>{this.props.meme.popularity}</p>
-            </div>
-        );
-    }
-});
-
 //Creating ToDoComponent component
 var ToDoComponent = React.createClass({
     getInitialState:function(){
@@ -63,7 +50,4 @@ var ToDoItem = React.createClass({
     }//render
 });
 
-var myMeme = {name: 'InnerMe', quality: 8, popularity:9};
-
-ReactDOM.render(<MemeComponent mssg="memes" meme={myMeme}/>, document.getElementById('meme-wrapper'));
 ReactDOM.render(<ToDoComponent/>, document.getElementById('todo-wrapper'));

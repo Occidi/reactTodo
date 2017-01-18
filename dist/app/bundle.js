@@ -52,26 +52,70 @@
 	var React = __webpack_require__(/*! react */ 1);
 	var ReactDOM = __webpack_require__(/*! react-dom */ 32);
 	
-	//Create component
+	//Creating ToDoComponent component
 	var ToDoComponent = React.createClass({
 	    displayName: 'ToDoComponent',
 	
+	    getInitialState: function getInitialState() {
+	        return {
+	            todos: ['watch', 'create', 'fuck'],
+	            age: 77
+	        };
+	    },
 	    render: function render() {
+	
+	        var younger = setTimeout(function () {
+	            this.setState({
+	                age: 76
+	            });
+	        }.bind(this), 5000);
+	
+	        var todos = this.state.todos;
+	        todos = todos.map(function (item, index) {
+	            return React.createElement(ToDoItem, { item: item, key: index });
+	        });
+	
 	        return React.createElement(
 	            'div',
-	            null,
+	            { id: 'todo-list' },
 	            React.createElement(
-	                'h1',
+	                'p',
 	                null,
-	                'Test'
+	                'Epic memes for epic dreams... '
 	            ),
 	            React.createElement(
 	                'p',
 	                null,
-	                'React'
+	                this.state.age
+	            ),
+	            React.createElement(
+	                'ul',
+	                null,
+	                todos
 	            )
 	        );
-	    }
+	    } //render
+	});
+	
+	//Creating ToDoItem component
+	var ToDoItem = React.createClass({
+	    displayName: 'ToDoItem',
+	
+	    render: function render() {
+	        return React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	                'div',
+	                { className: 'todo-item' },
+	                React.createElement(
+	                    'span',
+	                    { className: 'item-name' },
+	                    this.props.item
+	                )
+	            )
+	        );
+	    } //render
 	});
 	
 	ReactDOM.render(React.createElement(ToDoComponent, null), document.getElementById('todo-wrapper'));
