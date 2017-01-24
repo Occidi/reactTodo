@@ -1,12 +1,10 @@
+/* eslint-disable */
 
-window.onload = function()
-{
-    
-// const
+window.onload = function() {
+    // const
     const pi = 3.142;
 
-    function calcArea(r)
-    {
+    function calcArea(r) {
         const pi = 10;
         console.log(pi);
         console.log("The area is:" + pi * r * r);
@@ -59,7 +57,7 @@ window.onload = function()
     addNums(...nums);
 
 
-    //Template Strings
+    //Template Strings with ``
 
     function logMe(unNom, unAge)
     {
