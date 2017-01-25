@@ -1,12 +1,13 @@
-const React = require('react');
-require('./css/ToDoItem.scss');
+import React from 'react';
+import './css/ToDoItem.scss';
+
 // Creating ToDoItem component
 let ToDoItem = React.createClass({
     propTypes: {
         item: React.PropTypes.string.isRequired,
         onDelete: React.PropTypes.func.isRequired,
     },
-    render: function() {
+    render() {
         return(
             <li>
                 <div className="todo-item">
@@ -19,7 +20,7 @@ let ToDoItem = React.createClass({
     }, // render
 
     // handle function
-    handleDelete: function() {
+    handleDelete() {
         this.props.onDelete(this.props.item);
     },
 });

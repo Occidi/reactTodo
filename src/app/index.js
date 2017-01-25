@@ -9,7 +9,7 @@ import AddItem from './addItem';
 import About from './about';
 
 let App = React.createClass({
-    render: () => {
+    render() {
         return(
             <Router history={browserHistory}>
                 <Route path={'/'} component={ToDoComponent}></Route>
@@ -23,11 +23,32 @@ let App = React.createClass({
 let ToDoComponent = React.createClass({
     getInitialState: () => {
         return{
-            todos: ['watch', 'create', 'fuck'],
+            todos: [],
         };
     },
-    render: function() {
+
+    onDelete(item) {
+        let updatedTodos = this.state.todos.filter(function(val, index) {
+            return item !== val;
+        });
+        this.setState({
+            todos: updatedTodos,
+        });
+    },
+    onAdd(item) {
+        let updatedTodos = this.state.todos;
+        updatedTodos.push(item);
+        this.setState({
+            todos: updatedTodos,
+        });
+    },
+
+    render() {
         let todos = this.state.todos;
+        // si objet add Object.keys()
+
+        // parcours l'array todos avec .map
+        // et return un ToDoItem pour chaque item
         todos = todos.map(function(item, index) {
             return(
                 <ToDoItem item={item} key={index} onDelete={this.onDelete}/>
@@ -45,31 +66,28 @@ let ToDoComponent = React.createClass({
             </div>
         );
     }, // render
-
-    onDelete: function(item) {
-        let updatedTodos = this.state.todos.filter(function(val, index) {
-            return item !== val;
-        });
-        this.setState({
-            todos: updatedTodos,
-        });
-    },
-    onAdd: function(item) {
-        let updatedTodos = this.state.todos;
-        updatedTodos.push(item);
-        this.setState({
-            todos: updatedTodos,
-        });
-    },
     // lifecycle functions
-    componentWillMount: () => console.log('componentWillMount'),
+    componentWillMount() {
+        this.setState({
+            todos: ['componentWillMount'],
+        });
+        console.log('componentWillMount');
+    },
 
-    componentDidMount: function() {
+    componentDidMount() {
         console.log('componentDidMount');
         // any grabbing of external data
     },
 
-    componentWillUpdate: () => console.log('componentWillUpdate'),
+    componentWillUpdate() {
+        // a chaque modif
+        console.log('componentWillUpdate');
+    },
+
+    componentDidUpdate() {
+        // apres chaque modif
+        console.log('componentDidUpdate');
+    },
 });
 
 ReactDOM.render(<App />, document.getElementById('todo-wrapper'));

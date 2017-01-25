@@ -5,7 +5,7 @@ let AddItem = React.createClass({
      propTypes: {
         onAdd: React.PropTypes.func.isRequired,
     },
-    render: function() {
+    render() {
         return(
             <form id="add-todo" onSubmit={this.handleSubmit}>
                 <input type="text" name="" required ref="newItem" />
@@ -15,7 +15,7 @@ let AddItem = React.createClass({
     },
 
     // handle function
-    handleSubmit: function(e) {
+    handleSubmit(e) {
         e.preventDefault();
         this.props.onAdd(this.refs.newItem.value);
     },
