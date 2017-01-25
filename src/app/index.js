@@ -1,26 +1,32 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 require('./css/index.scss');
+import{Router, Route, browserHistory, Link} from 'react-router';
 
 // Module requires
 let ToDoItem = require('./todoitem');
 let AddItem = require('./addItem');
+let About = require('./about');
+
+let App = React.createClass({
+    render: function() {
+        return(
+            <Router history={browserHistory}>
+                <Route path={'/'} component={ToDoComponent}></Route>
+                <Route path={'/about'} component={About}></Route>
+            </Router>
+        );
+    },
+});
 
 // Creating ToDoComponent component
 let ToDoComponent = React.createClass({
     getInitialState: function() {
         return{
             todos: ['watch', 'create', 'fuck'],
-            age: 10,
         };
     },
     render: function() {
-        setTimeout(function() {
-            this.setState({
-            age: 100000,
-            });
-        }.bind(this), 3000);
-
         let todos = this.state.todos;
         todos = todos.map(function(item, index) {
             return(
@@ -30,8 +36,8 @@ let ToDoComponent = React.createClass({
 
         return(
             <div id="todo-list">
+                <Link to={'/about'}>About</Link>
                 <p>Epic memes for epic dreams... </p>
-                <p>{this.state.age}</p>
                 <ul>
                     {todos}
                 </ul>
@@ -55,6 +61,19 @@ let ToDoComponent = React.createClass({
             todos: updatedTodos,
         });
     },
+    // lifecycle functions
+    componentWillMount: function() {
+        console.log('componentWillMount');
+    },
+
+    componentDidMount: function() {
+        console.log('componentDidMount');
+        // any grabbing of external data
+    },
+
+    componentWillUpdate: function() {
+        console.log('componentWillUpdate');
+    },
 });
 
-ReactDOM.render(<ToDoComponent/>, document.getElementById('todo-wrapper'));
+ReactDOM.render(<App />, document.getElementById('todo-wrapper'));
