@@ -1,5 +1,5 @@
-const React = require('react');
-require('./css/AddItem.scss');
+import React from 'react';
+import './css/AddItem.scss';
 
 let AddItem = React.createClass({
      propTypes: {
@@ -9,7 +9,7 @@ let AddItem = React.createClass({
         return(
             <form id="add-todo" onSubmit={this.handleSubmit}>
                 <input type="text" name="" required ref="newItem" />
-                <input type="submit" name="" value="Lets go boiii"/>
+                <input type="submit" name="" value="Lets go boiii" />
             </form>
         );
     },

@@ -1,12 +1,12 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-require('./css/index.scss');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './css/index.scss';
 import{Router, Route, browserHistory, Link} from 'react-router';
 
 // Module requires
-let ToDoItem = require('./todoitem');
-let AddItem = require('./addItem');
-let About = require('./about');
+import ToDoItem from './todoitem';
+import AddItem from './addItem';
+import About from './about';
 
 let App = React.createClass({
     render: () => {
