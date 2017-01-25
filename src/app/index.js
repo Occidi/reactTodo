@@ -9,7 +9,7 @@ let AddItem = require('./addItem');
 let About = require('./about');
 
 let App = React.createClass({
-    render: function() {
+    render: () => {
         return(
             <Router history={browserHistory}>
                 <Route path={'/'} component={ToDoComponent}></Route>
@@ -21,7 +21,7 @@ let App = React.createClass({
 
 // Creating ToDoComponent component
 let ToDoComponent = React.createClass({
-    getInitialState: function() {
+    getInitialState: () => {
         return{
             todos: ['watch', 'create', 'fuck'],
         };
@@ -62,18 +62,14 @@ let ToDoComponent = React.createClass({
         });
     },
     // lifecycle functions
-    componentWillMount: function() {
-        console.log('componentWillMount');
-    },
+    componentWillMount: () => console.log('componentWillMount'),
 
     componentDidMount: function() {
         console.log('componentDidMount');
         // any grabbing of external data
     },
 
-    componentWillUpdate: function() {
-        console.log('componentWillUpdate');
-    },
+    componentWillUpdate: () => console.log('componentWillUpdate'),
 });
 
 ReactDOM.render(<App />, document.getElementById('todo-wrapper'));
