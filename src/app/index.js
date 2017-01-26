@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './css/index.scss';
 import{Router, Route, browserHistory, Link} from 'react-router';
 
-// Module requires
+// Modules
 import ToDoItem from './todoitem';
 import AddItem from './addItem';
 import About from './about';
