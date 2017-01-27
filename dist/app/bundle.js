@@ -90,17 +90,37 @@
 	// Creating ToDoComponent component
 	
 	
-	// Module requires
+	// Modules
 	var ToDoComponent = _react2.default.createClass({
 	    displayName: 'ToDoComponent',
 	
 	    getInitialState: function getInitialState() {
 	        return {
-	            todos: ['watch', 'create', 'fuck']
+	            todos: []
 	        };
+	    },
+	
+	    onDelete: function onDelete(item) {
+	        var updatedTodos = this.state.todos.filter(function (val, index) {
+	            return item !== val;
+	        });
+	        this.setState({
+	            todos: updatedTodos
+	        });
+	    },
+	    onAdd: function onAdd(item) {
+	        var updatedTodos = this.state.todos;
+	        updatedTodos.push(item);
+	        this.setState({
+	            todos: updatedTodos
+	        });
 	    },
 	    render: function render() {
 	        var todos = this.state.todos;
+	        // si objet add Object.keys()
+	
+	        // parcours l'array todos avec .map
+	        // et return un ToDoItem pour chaque item
 	        todos = todos.map(function (item, index) {
 	            return _react2.default.createElement(_todoitem2.default, { item: item, key: index, onDelete: this.onDelete });
 	        }.bind(this));
@@ -125,35 +145,26 @@
 	            ),
 	            _react2.default.createElement(_addItem2.default, { onAdd: this.onAdd })
 	        );
-	    }, // render
-	
-	    onDelete: function onDelete(item) {
-	        var updatedTodos = this.state.todos.filter(function (val, index) {
-	            return item !== val;
-	        });
-	        this.setState({
-	            todos: updatedTodos
-	        });
 	    },
-	    onAdd: function onAdd(item) {
-	        var updatedTodos = this.state.todos;
-	        updatedTodos.push(item);
-	        this.setState({
-	            todos: updatedTodos
-	        });
-	    },
+	    // render
 	    // lifecycle functions
 	    componentWillMount: function componentWillMount() {
-	        return console.log('componentWillMount');
+	        this.setState({
+	            todos: ['componentWillMount']
+	        });
+	        console.log('componentWillMount');
 	    },
-	
 	    componentDidMount: function componentDidMount() {
 	        console.log('componentDidMount');
 	        // any grabbing of external data
 	    },
-	
 	    componentWillUpdate: function componentWillUpdate() {
-	        return console.log('componentWillUpdate');
+	        // a chaque modif
+	        console.log('componentWillUpdate');
+	    },
+	    componentDidUpdate: function componentDidUpdate() {
+	        // apres chaque modif
+	        console.log('componentDidUpdate');
 	    }
 	});
 	
@@ -27690,29 +27701,35 @@
 
 	'use strict';
 	
-	var React = __webpack_require__(/*! react */ 1);
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
 	__webpack_require__(/*! ./css/ToDoItem.scss */ 238);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
 	// Creating ToDoItem component
-	var ToDoItem = React.createClass({
+	var ToDoItem = _react2.default.createClass({
 	    displayName: 'ToDoItem',
 	
 	    propTypes: {
-	        item: React.PropTypes.string.isRequired,
-	        onDelete: React.PropTypes.func.isRequired
+	        item: _react2.default.PropTypes.string.isRequired,
+	        onDelete: _react2.default.PropTypes.func.isRequired
 	    },
 	    render: function render() {
-	        return React.createElement(
+	        return _react2.default.createElement(
 	            'li',
 	            null,
-	            React.createElement(
+	            _react2.default.createElement(
 	                'div',
 	                { className: 'todo-item' },
-	                React.createElement(
+	                _react2.default.createElement(
 	                    'span',
 	                    { className: 'item-name' },
 	                    this.props.item
 	                ),
-	                React.createElement(
+	                _react2.default.createElement(
 	                    'span',
 	                    { className: 'item-delete',
 	                        onClick: this.handleDelete },
@@ -27720,7 +27737,8 @@
 	                )
 	            )
 	        );
-	    }, // render
+	    },
+	    // render
 	
 	    // handle function
 	    handleDelete: function handleDelete() {
@@ -27807,6 +27825,7 @@
 	            _react2.default.createElement('input', { type: 'submit', name: '', value: 'Lets go boiii' })
 	        );
 	    },
+	
 	
 	    // handle function
 	    handleSubmit: function handleSubmit(e) {
