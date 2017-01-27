@@ -1,26 +1,11 @@
 import React from 'react';
 import './css/index.scss';
-import{Router, Route, browserHistory, Link} from 'react-router';
+import {Link} from 'react-router';
 
 // Modules
 import ToDoItem from './ToDo/TodoItem';
 import AddItem from './ToDo/AddItem';
 
-// Pages
-import About from './About';
-
-
-// Routing
-let App = React.createClass({
-    render() {
-        return(
-            <Router history={browserHistory}>
-                <Route path={'/'} component={ToDoComponent}></Route>
-                <Route path={'/about'} component={About}></Route>
-            </Router>
-        );
-    },
-});
 
 // Creating ToDoComponent component
 let ToDoComponent = React.createClass({
@@ -72,7 +57,7 @@ let ToDoComponent = React.createClass({
     // lifecycle functions
     componentWillMount() {
         this.setState({
-            todos: ['componentWillMount'],
+            todos: ['waitingforData'],
         });
         console.log('componentWillMount');
     },
@@ -80,6 +65,11 @@ let ToDoComponent = React.createClass({
     componentDidMount() {
         console.log('componentDidMount');
         // any grabbing of external data
+        setTimeout(() => {
+            this.setState({
+                todos: ['externalData', 'externalData2'],
+            });
+        }, 5000);
     },
 
     componentWillUpdate() {
@@ -93,4 +83,4 @@ let ToDoComponent = React.createClass({
     },
 });
 
-module.exports = App;
+module.exports = ToDoComponent;
