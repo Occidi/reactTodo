@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/ToDoItem.scss';
+import '../css/ToDoItem.scss';
 
 // Creating ToDoItem component
 let ToDoItem = React.createClass({

@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/AddItem.scss';
+import '../css/AddItem.scss';
 
 let AddItem = React.createClass({
      propTypes: {
