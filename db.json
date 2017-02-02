@@ -1,0 +1,19 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "name": "test1",
+      "type": "feu"
+    },
+    {
+      "id": 2,
+      "name": "test2",
+      "type": "feu"
+    },
+    {
+      "id": 3,
+      "name": "test3",
+      "type": "feu"
+    }
+  ]
+}
