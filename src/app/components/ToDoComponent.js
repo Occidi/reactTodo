@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/index.scss';
 import {Link} from 'react-router';
-
+import {loadTodos, createTodo, destroyTodo} from '../lib/todoService';
 // Modules
 import ToDoItem from './ToDo/TodoItem';
 import AddItem from './ToDo/AddItem';
@@ -11,17 +11,24 @@ import AddItem from './ToDo/AddItem';
 let ToDoComponent = React.createClass({
     getInitialState: () => {
         return{
-            todos: [],
+            todos: [
+                /* {id: 1, name: 'test1', type: 'feu'},
+                {id: 2, name: 'test2', type: 'air'},
+                {id: 3, name: 'test3', type: 'feu'},*/
+            ],
         };
     },
 
     onDelete(item) {
-        let updatedTodos = this.state.todos.filter(function(val, index) {
+        let updatedTodos = this.state.todos.filter(function(val) {
             return item !== val;
         });
         this.setState({
             todos: updatedTodos,
         });
+        let id = item.id;
+        destroyTodo(id)
+            .then(() => this.showTimedMessage('Todo Removed'));
     },
     onAdd(item) {
         let updatedTodos = this.state.todos;
@@ -29,6 +36,12 @@ let ToDoComponent = React.createClass({
         this.setState({
             todos: updatedTodos,
         });
+        createTodo(item)
+            .then(() => this.showTimedMessage('Todo ajouté'));
+    },
+    showTimedMessage(msg) {
+        this.setState({message: msg});
+        setTimeout(() => this.setState({message: ''}), 2500);
     },
 
     render() {
@@ -37,15 +50,23 @@ let ToDoComponent = React.createClass({
 
         // parcours l'array todos avec .map
         // et return un ToDoItem pour chaque item
-        todos = todos.map(function(item, index) {
+        /* todos = todos.map(function(item, index) {
             return(
                 <ToDoItem item={item} key={index} onDelete={this.onDelete}/>
+            );
+        }.bind(this));*/
+
+        todos = todos.map(function(item, index) {
+            return(
+                <ToDoItem item={item} key={index} {...item}
+                onDelete={this.onDelete}/>
             );
         }.bind(this));
 
         return(
             <div id="todo-list">
                 <Link to={'/about'}>About</Link>
+                {this.state.message && <span className='success'>{this.state.message}</span>}
                 <p>Epic memes for epic dreams... </p>
                 <ul>
                     {todos}
@@ -56,20 +77,23 @@ let ToDoComponent = React.createClass({
     }, // render
     // lifecycle functions
     componentWillMount() {
-        this.setState({
+        /* this.setState({
             todos: ['waitingforData'],
-        });
+        });*/
         console.log('componentWillMount');
     },
 
     componentDidMount() {
         console.log('componentDidMount');
+        console.log('loaded from db');
         // any grabbing of external data
-        setTimeout(() => {
+       /* setTimeout(() => {
             this.setState({
                 todos: ['externalData', 'externalData2'],
             });
-        }, 5000);
+        }, 5000);*/
+        loadTodos()
+            .then((todos) => this.setState({todos}));
     },
 
     componentWillUpdate() {
