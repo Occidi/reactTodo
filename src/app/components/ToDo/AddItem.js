@@ -5,13 +5,17 @@ const AddItem = React.createClass({
      propTypes: {
         onAdd: React.PropTypes.func.isRequired,
     },
-    render() {
-        return(
-            <form id="add-todo" onSubmit={this.handleSubmit}>
-                <input type="text" name="" required ref="newItem" />
-                <input type="submit" name="" value="Lets go boiii" />
-            </form>
-        );
+
+    getInitialState: () => {
+        return{
+            nameValue: '',
+        };
+    },
+
+    handleChange(e) {
+        this.setState({
+            nameValue: e.target.value,
+        });
     },
 
     // handle function
@@ -21,11 +25,36 @@ const AddItem = React.createClass({
         let random = Math.floor(Math.random()*100000);
         let todo = {};
         todo.id = random;
-        todo.name = this.refs.newItem.value;
+        todo.name = this.state.nameValue;
         todo.type = 'eau';
-        console.log(todo);
         this.props.onAdd(todo);
+        this.setState({
+            nameValue: ['Thing to do'],
+        });
     },
+    render() {
+        return(
+            <form id="add-todo" onSubmit={this.handleSubmit}>
+                <input
+                    type="text"
+                    name=""
+                    value={this.state.nameValue}
+                    onChange={this.handleChange}
+                    required />
+                <input
+                    type="submit"
+                    name=""
+                    value="Lets go boiii" />
+            </form>
+        );
+    },
+
+    componentWillMount() {
+        this.setState({
+            nameValue: ['Thing to do'],
+        });
+    },
+
 });
 
 module.exports = AddItem;
