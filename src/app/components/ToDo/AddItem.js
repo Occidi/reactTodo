@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/AddItem.scss';
 
-let AddItem = React.createClass({
+const AddItem = React.createClass({
      propTypes: {
         onAdd: React.PropTypes.func.isRequired,
     },
@@ -17,7 +17,14 @@ let AddItem = React.createClass({
     // handle function
     handleSubmit(e) {
         e.preventDefault();
-        this.props.onAdd(this.refs.newItem.value);
+        // create a random id for the todo
+        let random = Math.floor(Math.random()*100000);
+        let todo = {};
+        todo.id = random;
+        todo.name = this.refs.newItem.value;
+        todo.type = 'eau';
+        console.log(todo);
+        this.props.onAdd(todo);
     },
 });
 
